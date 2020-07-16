@@ -369,6 +369,8 @@ class Config(object):
     def __str__(self):
         s = b"wandb_version: 1"
         as_dict = self.as_dict()
+        if "callbacks" in as_dict:
+            as_dict['callbacks']['value'] = 'CustomCallbacks'
         if as_dict:  # adding an empty dictionary here causes a parse error
             s += b'\n\n' + yaml.dump(as_dict, Dumper=yaml.SafeDumper, default_flow_style=False,
                                      allow_unicode=True, encoding='utf-8')
